@@ -14,7 +14,6 @@ int main() {
 
   double gamma1 = 2.2;
   cv::Mat G_1;
-  cv::cvtColor(img, G_1, CV_32FC1);
   cv::normalize(img, G_1, 1.0, 0.0, cv::NORM_MINMAX, CV_32FC1);
 
   auto e1 = cv::getTickCount();
@@ -27,7 +26,6 @@ int main() {
   std::cout << "Time for cv::pow() via chrono " << time_1.count() << std::endl;
   std::cout << "Time for cv::pow() via cv::getTickCount " << E1 << std::endl;
   cv::normalize(G_1, G_1, 255, 0, cv::NORM_MINMAX, CV_8UC1); //convert to CV_8UC1 with normalize
-  //cv::imshow("G_1", G_1);
 
   float gamma2 = 2.4;
   cv::Mat G_2(cv::Mat::zeros(60, 768, CV_32FC1));
@@ -51,9 +49,6 @@ int main() {
   std::cout << "Time for per pixel pow() via chrono " << time_span2.count() << std::endl;
   std::cout << "Time for per pixel pow() cv::getTickCount() " << E2 << std::endl;
   cv::normalize(G_2, G_2, 255, 0, cv::NORM_MINMAX, CV_8UC1);
-  //cv::imshow("G_2", G_2);
-  //cv::imshow("G_2_norm", G_2);
-  //cv::waitKey();
 
   cv::Mat matRes(img.rows * 3, img.cols + 140, img.type());
   cv::Mat matRoi = matRes(cv::Rect(0, 0, img.cols, img.rows));
